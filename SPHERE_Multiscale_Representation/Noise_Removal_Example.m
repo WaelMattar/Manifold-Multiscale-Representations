@@ -13,7 +13,7 @@ norms         =  zeros(n - 1, 1);
 
 % Generating 2-dimensional normally distributed noise
 mu            =  zeros(1, 2);
-Sigma         =  1/250 * eye(2);
+Sigma         =  1/1000 * eye(2);
 rng('default');
 XY            =  mvnrnd(mu, Sigma, length(points));
 Z             =  points(:,3).^(-1) .* (-XY(:,1).*points(:,1) - XY(:,2).*points(:,2));
@@ -43,8 +43,6 @@ for k = 2: n - num_of_truncated_details
    reconstructed  =  SPHERE_reconstruct(reconstructed, pyramid{k}); 
 end
 
-denoised_std = Noise_measure(reconstructed);
-
 % Refining the reconstructed curve
 for k = 1: num_of_truncated_details
     reconstructed = SPHERE_cubic_refine(reconstructed);
@@ -70,6 +68,6 @@ hold off;
 figure(3); hold on;
 SPHERE_plot(reconstructed);
 saveas(gcf,fullfile(fpath, 'sphere_denoised_points'),'fig');
-fprintf('Denoised curve std: %f\n', denoised_std);
+fprintf('Denoised curve std: %f\n', Noise_measure(reconstructed));
 hold off;
 
