@@ -13,7 +13,7 @@ norms         =  zeros(n - 1, 1);
 
 % Generating 2-dimensional normally distributed noise
 mu            =  zeros(1, 2);
-Sigma         =  1/1000 * eye(2);
+Sigma         =  1/2500 * eye(2);
 rng('default');
 XY            =  mvnrnd(mu, Sigma, length(points));
 Z             =  points(:,3).^(-1) .* (-XY(:,1).*points(:,1) - XY(:,2).*points(:,2));
@@ -36,16 +36,15 @@ for k = 2: n
     norms(k - 1) = max(sqrt(sum(pyramid{k}.^2,2)));
 end
 
-% Reconstruction of truncated pyramid
-num_of_truncated_details       =   3; 
-reconstructed                  =   pyramid{1};
-for k = 2: n - num_of_truncated_details
-   reconstructed  =  SPHERE_reconstruct(reconstructed, pyramid{k}); 
+% Noise filtering
+for k = 2: n
+    pyramid{k} = Noise_shrink(pyramid{k}, 0.26);
 end
 
-% Refining the reconstructed curve
-for k = 1: num_of_truncated_details
-    reconstructed = SPHERE_cubic_refine(reconstructed);
+% Reconstruction
+reconstructed                  =   pyramid{1};
+for k = 2: n
+   reconstructed  =  SPHERE_reconstruct(reconstructed, pyramid{k}); 
 end
 
 % Demonstrations
