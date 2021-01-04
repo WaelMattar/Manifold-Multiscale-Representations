@@ -7,12 +7,10 @@ if n~=3
     error('Error in dimensions!');
 end
 
-noise_free  =   SPHERE_build_curve(m);
-
 sum = 0;
 for k = 1: m
-    noise    =  SPHERE_Log(noise_free(k, :), noisy_data(k, :));
-    sum      =  sum + norm(noise, 2)^2;
+    displacement    =  minimal_distance(noisy_data(k, :));
+    sum             =  sum + displacement;
 end
 
 var      =  sum / m;
