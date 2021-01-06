@@ -51,6 +51,7 @@ for k = 1 : n - 1
        set(gca,'YTick', ytck);
        set(gca,'fontsize',14);
 end
+set(gcf,'position',[10,10,700,600]);
 saveas(gcf,fullfile(fpath, 'spd_multiscale_details'),'fig');
 hold off;
 

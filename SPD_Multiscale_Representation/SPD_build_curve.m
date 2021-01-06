@@ -22,7 +22,8 @@ syms d_1(x);
 syms d_2(x);
 syms d_3(x);
 
-mag          = 0;
+% Heaviside step function
+mag          = 150;
 step_func(x) = mag * (heaviside(x - 10/3) - heaviside(x - 20/3));
 
 f_1(x) = 10 +  sin(x*pi*2/5);

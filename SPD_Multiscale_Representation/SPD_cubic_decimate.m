@@ -3,7 +3,9 @@ function  new_data = SPD_cubic_decimate(data)
 m          =  length(data);
 L          =  (m+1)/2;
 alpha_ev   =  1/8*[1 6 1];
-gamma      =  AffineInvariant(find_gamma(alpha_ev.', 3));
+eps        =  5;
+
+gamma      =  AffineInvariant(find_gamma(alpha_ev.', eps));
 
 G          =  length(gamma);
 half_G     =  floor(G/2);
