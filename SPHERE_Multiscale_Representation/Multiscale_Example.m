@@ -17,7 +17,7 @@ end
 
 % Measuring the norms
 for k = 1 : n-1
-   details_norms{k}  =  sqrt(sum(pyramid{k+1}.^2,2));
+   details_norms{k}    =  sqrt(sum(pyramid{k+1}.^2,2));
    norms(k)            =  max(details_norms{k});
 end
 
@@ -46,7 +46,5 @@ ylabel('$\log_{10}\|d^{(\ell)}\|_\infty$','interpreter','latex');
 set(gca,'fontsize',14);
 saveas(gcf,fullfile(fpath, 'sphere_multiscale_norms'),'fig');
 hold off;
-
-
 
 

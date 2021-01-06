@@ -3,13 +3,14 @@ function new_data = SPHERE_cubic_decimate(data)
 
 [m, n]         =  size(data);
 L              =  (m+1)/2;
+eps            =  5;
 
 if   mod(m, 2) == 0 || n~=3
     error('The number of the data is even! or  error in dimension');
 end
 
 alpha_ev  =  1/8*[1 6 1];
-gamma =  AffineInvariant(find_gamma(alpha_ev.', 3));
+gamma =  AffineInvariant(find_gamma(alpha_ev.', eps));
 
 G         =  length(gamma);
 half_G    =  floor(G/2);

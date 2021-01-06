@@ -31,11 +31,6 @@ for k = n: -1: 2
     [pyramid{k-1}, pyramid{k}]  =  SPHERE_decompose(pyramid{k});
 end
 
-% Measuring the norms of the details
-for k = 2: n
-    norms(k - 1) = max(sqrt(sum(pyramid{k}.^2,2)));
-end
-
 % Noise filtering
 for k = 2: n
     pyramid{k} = Noise_shrink(pyramid{k}, 0.26);
@@ -47,26 +42,27 @@ for k = 2: n
    reconstructed  =  SPHERE_reconstruct(reconstructed, pyramid{k}); 
 end
 
+% Connecting geodesics
+geodesics = Noisy_data;
+for k = 1: 3
+    geodesics = SPHERE_DD0_refine(geodesics);
+end
+
+% Measuring the noise
+pre_denoising  = Noise_measure(geodesics);
+post_denoising = Noise_measure(reconstructed);
+
 % Demonstrations
 figure(1); hold on;
-SPHERE_plot(Noisy_data);
+SPHERE_plot(geodesics);
 fpath = 'D:\Program Files\MATLAB\R2015b\SPHERE_Multiscale_Representation\Generated_Images';
 saveas(gcf,fullfile(fpath, 'sphere_noisy_points'),'fig');
-fprintf('Noisy curve std: %f\n', Noise_measure(Noisy_data));
+fprintf('Noisy curve std: %f\n', pre_denoising);
 hold off;
 
-figure(2); hold on; grid on;
-h = plot(range, log10(norms), 'b', 'LineWidth', 2);
-xlabel('Level of details -- $\ell$','interpreter','latex');
-ylabel('$\log_{10}\|d^{(\ell)}\|_\infty$','interpreter','latex');
-set(gca,'fontsize',18);
-xlim([1, n-1]);
-saveas(gcf,fullfile(fpath, 'sphere_noisy_details'),'fig');
-hold off;
-
-figure(3); hold on;
+figure(2); hold on;
 SPHERE_plot(reconstructed);
 saveas(gcf,fullfile(fpath, 'sphere_denoised_points'),'fig');
-fprintf('Denoised curve std: %f\n', Noise_measure(reconstructed));
+fprintf('Denoised curve std: %f\n', post_denoising);
 hold off;
 
