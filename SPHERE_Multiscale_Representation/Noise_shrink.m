@@ -4,7 +4,7 @@ function filtered_details = Noise_shrink(details, eps)
 L = length(details);
 
 for k = 1: L
-   if norm(details(k, :) ,2) < eps
+   if vpa(norm(details(k, :) ,2)) < eps
        details(k, :) = zeros(1,3);
    end
 end

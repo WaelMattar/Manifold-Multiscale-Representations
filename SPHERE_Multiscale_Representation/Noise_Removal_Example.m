@@ -13,7 +13,7 @@ norms         =  zeros(n - 1, 1);
 
 % Generating 2-dimensional normally distributed noise
 mu            =  zeros(1, 2);
-Sigma         =  1/2500 * eye(2);
+Sigma         =  1/3000 * eye(2);
 rng('default');
 XY            =  mvnrnd(mu, Sigma, length(points));
 Z             =  points(:,3).^(-1) .* (-XY(:,1).*points(:,1) - XY(:,2).*points(:,2));
@@ -33,7 +33,7 @@ end
 
 % Noise filtering
 for k = 2: n
-    pyramid{k} = Noise_shrink(pyramid{k}, 0.26);
+    pyramid{k} = Noise_shrink(pyramid{k}, 0.2);
 end
 
 % Reconstruction

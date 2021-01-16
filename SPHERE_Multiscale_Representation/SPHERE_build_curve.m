@@ -10,6 +10,5 @@ x_curve    = sin(phi).*cos(theta); y_curve    = sin(phi).*sin(theta); z_curve   
 
 data  =  horzcat(x_curve.', y_curve.', z_curve.');
 
-
 end
 
