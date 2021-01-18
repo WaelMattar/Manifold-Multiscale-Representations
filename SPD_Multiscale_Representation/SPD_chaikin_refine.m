@@ -17,7 +17,7 @@ end
 % Fixing the right boundary conditions
 new_data{1}      =  SPD_Frechet_mean({data{end-1} data{1}}, alpha_ev);
 new_data{2}      =  SPD_Frechet_mean({data{end-1} data{1}}, alpha_od);   
-    
+
 for j = 1: length(new_data)
     new_data{j} = real(new_data{j,1}{1,1});
 end

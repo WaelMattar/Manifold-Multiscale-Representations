@@ -7,6 +7,7 @@ for j = 1:n
 end
 
 details_norms   =    cell(n - 1, 1);
+max_norms       =    zeros(n - 1, 1);
 
 % Measuring the norms
 for k = 1 : n-1
@@ -22,6 +23,7 @@ for k = 1 : n - 1
        set(gca,'XTickLabel',[]);
        xlim([0, 2*pi]);
        yticklabels = [0, max_norms(k)];
+       set(gca, 'xtick', [0, 2*pi]);
        set(gca,'YTick', yticklabels);
        set(gca,'fontsize',14);
 end

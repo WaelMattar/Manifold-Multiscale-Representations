@@ -28,9 +28,15 @@ plot(range, log10(norms(2:end,1)),'-.r','LineWidth',2);
 plot(range, log10(norms(2:end,2)),'b','LineWidth',2);
 xlim([1 n-1]);
 xlabel('Level of details -- $\ell$','interpreter','latex');
-ylabel('$\log_{10}\|d^{(\ell)}\|_\infty$','interpreter','latex');
+ylabel('$\|d^{(\ell)}\|_\infty$','interpreter','latex');
 set(gca,'fontsize',14);
-fpath = 'D:\Program Files\MATLAB\R2015b\TRUNCATION_Multiscale_Representation\Generated_Images';
+
+% Changing labels on y-axis
+yt     =  str2double(arrayfun(@num2str,get(gca,'ytick'),'un',0));
+labels =  arrayfun(@(yt)sprintf('10^{%.1f}', yt), yt, 'uni', 0);
+set(gca,'YTickLabel',labels);
+
+fpath = 'D:\Git_Projects\Manifold-Multiscale-Representations\TRUNCATION_Multiscale_Representation\Generated_Images';
 saveas(gcf,fullfile(fpath, 'truncation_comparison'),'fig');
 hold off;
 
