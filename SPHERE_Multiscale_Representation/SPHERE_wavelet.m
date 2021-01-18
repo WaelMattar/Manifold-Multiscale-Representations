@@ -1,5 +1,5 @@
 function  [pyramid]  =  SPHERE_wavelet(iter)
-% Decomposing data with iter iterations
+% Decomposing curve data samples with iter iterations
 
 pyramid      =  cell(iter, 1);
 

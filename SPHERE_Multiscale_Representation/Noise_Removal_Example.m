@@ -7,13 +7,12 @@ n             =  6;
 points        =  SPHERE_build_curve(10*2^(n-1)+1);
 
 % Workspace
-pyramid       =  cell(n, 1);
 range         =  linspace(1,n - 1, n - 1);
 norms         =  zeros(n - 1, 1);
 
 % Generating 2-dimensional normally distributed noise
 mu            =  zeros(1, 2);
-Sigma         =  1/3000 * eye(2);
+Sigma         =  1/7000 * eye(2);
 rng('default');
 XY            =  mvnrnd(mu, Sigma, length(points));
 Z             =  points(:,3).^(-1) .* (-XY(:,1).*points(:,1) - XY(:,2).*points(:,2));
@@ -26,43 +25,51 @@ for k = 1: length(points)
 end
 
 % Multiscale transform on noisy data
-pyramid{end}  =  Noisy_data;
-for k = n: -1: 2
-    [pyramid{k-1}, pyramid{k}]  =  SPHERE_decompose(pyramid{k});
-end
+pyramid       =  SPHERE_pyramid(Noisy_data, n);
 
 % Noise filtering
 for k = 2: n
-    pyramid{k} = Noise_shrink(pyramid{k}, 0.2);
+    pyramid{k} = Noise_shrink(pyramid{k}, 0.14);
 end
 
 % Reconstruction
-reconstructed                  =   pyramid{1};
+denoised                  =   pyramid{1};
 for k = 2: n
-   reconstructed  =  SPHERE_reconstruct(reconstructed, pyramid{k}); 
+   denoised  =  SPHERE_reconstruct(denoised, pyramid{k}); 
 end
 
 % Connecting geodesics
 geodesics = Noisy_data;
-for k = 1: 3
+for k = 1: 2
     geodesics = SPHERE_DD0_refine(geodesics);
 end
 
 % Measuring the noise
 pre_denoising  = Noise_measure(geodesics);
-post_denoising = Noise_measure(reconstructed);
+post_denoising = Noise_measure(denoised);
 
 % Demonstrations
 figure(1); hold on;
 SPHERE_plot(geodesics);
-fpath = 'D:\Program Files\MATLAB\R2015b\SPHERE_Multiscale_Representation\Generated_Images';
+fpath = 'D:\Git_Projects\Manifold-Multiscale-Representations\SPHERE_Multiscale_Representation\Generated_Images';
 saveas(gcf,fullfile(fpath, 'sphere_noisy_points'),'fig');
 fprintf('Noisy curve std: %f\n', pre_denoising);
 hold off;
 
 figure(2); hold on;
-SPHERE_plot(reconstructed);
+SPHERE_plot(denoised);
 saveas(gcf,fullfile(fpath, 'sphere_denoised_points'),'fig');
 fprintf('Denoised curve std: %f\n', post_denoising);
 hold off;
+
+figure(3); hold on;
+SPHERE_pyramid_plot(SPHERE_pyramid(Noisy_data, n));
+saveas(gcf,fullfile(fpath, 'sphere_noisy_details'),'fig');
+hold off;
+
+figure(4); hold on;
+SPHERE_pyramid_plot(SPHERE_pyramid(denoised, n));
+saveas(gcf,fullfile(fpath, 'sphere_denoised_details'),'fig');
+hold off;
+
 
