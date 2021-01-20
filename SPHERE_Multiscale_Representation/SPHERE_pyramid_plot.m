@@ -26,6 +26,7 @@ for k = 1 : n - 1
        set(gca, 'xtick', [0, 2*pi]);
        set(gca,'YTick', yticklabels);
        set(gca,'fontsize',24);
+       set(gca, 'Box', 'off');
        %set(get(gca,'ylabel'),'rotation',60);
 end
 set(gcf,'position',[10,10,1000,800]);

@@ -31,6 +31,7 @@ for k = 1 : L - 1
        set(gca,'YTick', ytck);
        set(gca,'fontsize',20);
        set(gca, 'xtick', [0, 10]);
+       set(gca, 'Box', 'off');
 end
 set(gcf,'position',[10,10,700,600]);
 
