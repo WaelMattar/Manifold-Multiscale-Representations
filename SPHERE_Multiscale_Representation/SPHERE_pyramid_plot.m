@@ -19,14 +19,15 @@ subplot(n - 1 , 1, 1);
 for k = 1 : n - 1 
        subplot(n - 1, 1, k);
        stem(N{k+1}, details_norms{k},'b','Marker','none','LineWidth',1);
-       xlabel(['$\|d^{(',num2str(k),')}_k\|$'],'interpreter','latex');
+       ylabel(['scale ',num2str(k)],'interpreter','latex');
        set(gca,'XTickLabel',[]);
        xlim([0, 2*pi]);
        yticklabels = [0, max_norms(k)];
        set(gca, 'xtick', [0, 2*pi]);
        set(gca,'YTick', yticklabels);
-       set(gca,'fontsize',14);
+       set(gca,'fontsize',24);
+       %set(get(gca,'ylabel'),'rotation',60);
 end
-set(gcf,'position',[10,10,700,600]);
+set(gcf,'position',[10,10,1000,800]);
 
 end
