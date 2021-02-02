@@ -5,8 +5,8 @@ close all;
 tic;
 
 % Setting the sampling level and truncation parameter
-n       =    5;
-eps     =    2;
+n       =    15;
+eps     =    3;
 
 % Workspace
 range        =    linspace(1, n-1, n-1);
