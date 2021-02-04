@@ -5,8 +5,8 @@ close all;
 tic;
 
 % Setting the sampling level and truncation parameter
-n       =    15;
-eps     =    3;
+n       =    11;
+eps     =    5;
 
 % Workspace
 range        =    linspace(1, n-1, n-1);
@@ -33,7 +33,7 @@ set(gca,'fontsize',14);
 
 % Changing labels on y-axis
 yt     =  str2double(arrayfun(@num2str,get(gca,'ytick'),'un',0));
-labels =  arrayfun(@(yt)sprintf('10^{%.1f}', yt), yt, 'uni', 0);
+labels =  arrayfun(@(yt)sprintf('10^{%.f}', yt), yt, 'uni', 0);
 set(gca,'YTickLabel',labels);
 
 fpath = 'D:\Git_Projects\Manifold-Multiscale-Representations\TRUNCATION_Multiscale_Representation\Generated_Images';
