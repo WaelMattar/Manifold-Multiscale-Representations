@@ -28,8 +28,8 @@ plot(range, log10(norms(2:end,1)),'-.r','LineWidth',2);
 plot(range, log10(norms(2:end,2)),'b','LineWidth',2);
 xlim([1 n-1]);
 xlabel('Level of details -- $\ell$','interpreter','latex');
-ylabel('$\|d^{(\ell)}\|_\infty$','interpreter','latex');
-set(gca,'fontsize',14);
+ylabel('$\|\bf{d}^{(\ell)}\|_\infty$','interpreter','latex');
+set(gca,'fontsize',18);
 
 % Changing labels on y-axis
 yt     =  str2double(arrayfun(@num2str,get(gca,'ytick'),'un',0));
