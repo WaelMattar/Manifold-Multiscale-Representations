@@ -11,7 +11,7 @@ end
 
 delta_c =  max(distances);
 
-decimated_data    =  SPD_cubic_decimate(data);
+decimated_data    =  SPD_chaikin_decimate(data);
 
 for k = 1: length(decimated_data)-1
     decimated_distances(k)  =  norm(SPD_Log(decimated_data{k}, decimated_data{k+1}), 'fro');

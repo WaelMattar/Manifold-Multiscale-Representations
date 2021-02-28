@@ -4,7 +4,8 @@ function new_data  =  SPD_chaikin_decimate(data)
 m          =  length(data);
 L          =  (m+1)/2;
 alpha_ev   =  1/4*[3 1];
-gamma      =  AffineInvariant(find_gamma(alpha_ev.', 4));
+eps        =  4;
+gamma      =  AffineInvariant(find_gamma(alpha_ev.', eps));
 gamma      =  vertcat(zeros(length(gamma), 1), gamma);
 
 G          =  length(gamma);
