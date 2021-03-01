@@ -11,7 +11,7 @@ L           = length(alpha);
 zero_pad_size = floor((GammaLength-L)/2);
 zero_pad      = zeros(zero_pad_size,1);
 
-padded_vec    =[zero_pad;alpha;zero_pad];
+padded_vec    = [zero_pad;alpha;zero_pad];
 
 gamma_mask = ifft( 1./fft(padded_vec) ); % plot(abs(fft(padded_vec)))
 
