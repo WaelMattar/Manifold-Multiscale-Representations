@@ -30,6 +30,7 @@ xlim([1 n-1]);
 xlabel('Level of details -- $\ell$','interpreter','latex');
 ylabel('$\|\bf{d}^{(\ell)}\|_\infty$','interpreter','latex');
 set(gca,'fontsize',18);
+legend({'Truncated $\mathcal{D}_{\widetilde{{\gamma}}}$','Normalized $\mathcal{D}_{\zeta}$'},'Interpreter','latex')
 
 % Changing labels on y-axis
 yt     =  str2double(arrayfun(@num2str,get(gca,'ytick'),'un',0));
